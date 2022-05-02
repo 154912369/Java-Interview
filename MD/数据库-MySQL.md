@@ -46,6 +46,10 @@ MyISAM相对简单所以在效率上要优于InnoDB。如果系统插入和查�
 
 不同事务隔离级别的问题：  
 [https://www.jianshu.com/p/4e3edbedb9a8](https://www.jianshu.com/p/4e3edbedb9a8)
+* 读取未提交数据(read uncommitted): 可能脏读（在事物A未commit之前，事物B读到事物A的部分结果，这部分结果可能因为事物A的失败，没有写入数据库）
+* 读取已提交数据(read committed）：可能导致不可重复读（事物A内两次读取某个事物的时候，读取的值不一样。）
+* 读取已提交数据(read committed）：可能导致不可重复读（事物A内两次读取某个事物的时候，读取的值不一样。）
+
 
 ## 锁表、锁行
 1. InnoDB 支持表锁和行锁，使用索引作为检索条件修改数据时采用行锁，否则采用表锁
