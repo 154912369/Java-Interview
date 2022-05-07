@@ -4,15 +4,21 @@ Spring是个包含一系列功能的合集，如快速开发的Spring Boot，支
 
 ### Spring MVC流程
 过滤器是在tomcat那一层处理的,过滤器的doFilter函数内部执行所有DispatcherServlet的过程。
+
 1. 发送请求，进入过滤器。过滤器中doFilter函数会将请求交给jetty（或者tomact）。
     doFilter函数完成下面的2-5步骤。
+    
 2.jetty（或者tomact）将请求交给DispatcherServlet。
      DispatcherServlet继承自javax.servlet.Servlet是处理web的函数。
+     
 3.DispatcherServlet拦截器拿到交给HandlerMapping
     交给HandlerMapping的函数是doDispatch，目前看到七种HandlerMapping，普通的get请求用的是RequestMappingHandlerMapping。
+    
 4. 依次调用配置的拦截器，最后找到配置好的业务代码Handler并执行业务方法
     拦截器和业务代码都是保存在HandlerExecutionChain，HandlerExecutionChain是HandlerMapping给出的,都是spring中的概念。
+    
 5. 包装成ModelAndView返回给ViewResolver解析器渲染页面
+
 6.过滤器处理完毕。
 
 ### 解决循环依赖
